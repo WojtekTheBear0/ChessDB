@@ -1,0 +1,65 @@
+TABLES
+endgame:
+VARCHAR  FEN  -  FEN notation of a position
+VARCHAR  Result  -  Best play result of position
+VARCHAR  Type  -  If the endgame is of a known type of position (such as a philidor's endgame, is derived from FEN) then give it its specific name
+
+book:
+VARCHAR  Title  -  Title of the book
+VARCHAR  Author  -  Who wrote the book
+VARCHAR  Description  -  Book's description
+VARCHAR  Focus_Area  -  What is the book about; tactics, openings, endgames, general?
+INT  Publication_Year  -  Year the book was published
+VARCHAR  Openings  -  What openings are mentioned in the books description or title
+VARCHAR  Endgames  -  What endgames are mentioned in the books description or title
+
+opening:
+VARCHAR  FEN  -  FEN notation of a position
+VARCHAR  Name  -  Name of the opening
+VARCHAR  ECO  -  Abstracted letter and digits that represent a named opening  
+
+master:
+INT  Player_ID  -  Unique ID of any player from FIDE
+VARCHAR  Name  -  Name of player
+VARCHAR  Country  -  Country the player is from
+INT  Peak_Rating  -  Highest rating the player has achieved
+
+match:
+Match_ID  -  Event + round number of match (composite key)
+VARCHAR  Event  -  Event the match was played at
+VARCHAR  Round  -  Round of the event
+INT  White_ID  -  Player_ID of the player with white
+INT  Black_ID  -  Player_ID of the player with black
+VARCHAR  Result  -  Result of the game (1-0, 0-1, or 1/2-1/2)
+VARCHAR  PGN  -  Moves of the game
+VARCHAR  Opening  -  The opening played
+INT Start_Endgame  -  First move of endgame positions trackable from the database
+
+yearlytop100:
+Year_Rank  -  The year and rank (composite primary key)
+INT  Year  -  Year of the rankings
+INT  Rank  -  Rank of the player
+INT  Player_ID  -  ID of the player in question
+INT  Rating  -  Rating at the time
+
+
+
+RELATIONSHIPS
+- Book to Endgame (Many optional to Many optional): There are different types of endgames, if the description or title of a book references that type of endgame, then that book will be associated with that endgame type (endgame.type to book.endgames, will require junction table)
+- Book to Opening (Many optional to Many optional): There are different openings, if the description or title of the book references that name of the opening, then that book will be associated with that opening (book.openings to opening.name, will require junction table)
+- Book to Master (Many optional to many optional): Books may be authored by masters, but they may not (book.author to master.name, will require junction table)
+- Match to Opening (One required to many optional): Every game will have an opening, whatever the longest book line seen in the game is will be the one associated with that game (match.opening to opening.matches)
+- Match to Endgame (Many optional to many optional): Every endgame position seen in the game will be stored as a game associated with that endgame position (match.pgn and match.start_endgame to endgame.matches, will require junction table)
+- Match to Master (Many required to many required): Every match will have two players play, if those players are masters they will be associated with the master table (match.white_id and match.black_id to master.player_id)
+- Master to Top100 (Many optional to many required): Every top 100 must have masters but not every master will make the top 100 (master.player_id to top100.player_id)
+
+
+
+Sources:
+https://syzygy-tables.info Use for endgames, I would recommend using the 3 to 5 piece tables sense the others are too big
+https://everymanchess.com Use for books, gonna need to do some scraping for this one
+https://huggingface.co/datasets/Lichess/chess-openings You found this one for openings, you can use this one, ball out (https://old.chesstempo.com/chess-openings.html alternative)
+https://ratings.fide.com Use for masters, I would recommend only doing IM's and GM's (2400+), gonna need to scrape but this one should be easy (https://old.chesstempo.com/chess-players.html alternative)
+https://ratings.fide.com/download.phtml Use for top 100 players through time, you have to download manual xml files for each year, they only have data going back to 2001 
+** Still looking into matches table source **
+
