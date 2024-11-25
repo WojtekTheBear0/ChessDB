@@ -28,9 +28,8 @@ CREATE TABLE opening (
 );
 
 -- Table: Master
-CREATE TABLE master (
-    Player_ID INT PRIMARY KEY,            -- Unique ID of FIDE player
-    `Name` VARCHAR(255) NOT NULL UNIQUE,           -- Name of the player
+CREATE TABLE master (            
+    `Name` VARCHAR(255) PRIMARY KEY,           -- Name of the player
     Country VARCHAR(255),                 -- Country the player represents
     Peak_Rating INT                       -- Highest rating achieved
 );
@@ -39,25 +38,25 @@ CREATE TABLE master (
 CREATE TABLE `match` (
     Event VARCHAR(255) NOT NULL,          -- Event name
     Round VARCHAR(50) NOT NULL,           -- Round number of the event
-    White_ID INT NOT NULL,                -- ID of the player with white pieces
-    Black_ID INT NOT NULL,                -- ID of the player with black pieces
+    White_Name VARCHAR NOT NULL,                -- ID of the player with white pieces
+    Black_Name VARCHAR NOT NULL,                -- ID of the player with black pieces
     Result CHAR(3),                       -- Result of the match ("1-0", "0-1", "1/2")
     PGN TEXT,                             -- Moves of the game in PGN format
     Opening VARCHAR(255),                 -- Opening played in the match
     Start_Endgame INT,                    -- First move of endgame positions
     PRIMARY KEY (Event, Round),           -- Composite primary key
-    FOREIGN KEY (White_ID) REFERENCES master(Player_ID),
-    FOREIGN KEY (Black_ID) REFERENCES master(Player_ID)
+    FOREIGN KEY (White_Name) REFERENCES master(`Name`),
+    FOREIGN KEY (Black_Name) REFERENCES master(`Name`)
 );
 
 -- Table: YearlyTop100
 CREATE TABLE yearlytop100 (
     Year INT NOT NULL,                    -- Year of the rankings
     `Rank` INT NOT NULL,                    -- Player's rank
-    Player_ID INT NOT NULL,               -- Player's ID
+    Player_Name TEXT NOT NULL,               -- Player's name
     Rating INT,                           -- Rating at the time
     PRIMARY KEY (Year, `Rank`),             -- Composite primary key
-    FOREIGN KEY (Player_ID) REFERENCES master(Player_ID)
+    FOREIGN KEY (Player_Name) REFERENCES master(`Name`)
 );
 
 -- Junction Table: Book to Endgame
