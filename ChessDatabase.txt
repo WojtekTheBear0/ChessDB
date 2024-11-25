@@ -19,7 +19,6 @@ VARCHAR  Name  -  Name of the opening
 VARCHAR  ECO  -  Abstracted letter and digits that represent a named opening  
 
 master:
-INT  Player_ID  -  Unique ID of any player from FIDE
 VARCHAR  Name  -  Name of player
 VARCHAR  Country  -  Country the player is from
 INT  Peak_Rating  -  Highest rating the player has achieved
@@ -28,8 +27,8 @@ match:
 Match_ID  -  Event + round number of match (composite key)
 VARCHAR  Event  -  Event the match was played at
 VARCHAR  Round  -  Round of the event
-INT  White_ID  -  Player_ID of the player with white
-INT  Black_ID  -  Player_ID of the player with black
+VARCHAR  White_Name  -  Name of the player with white
+INT  Black_Name  -  Name of the player with black
 VARCHAR  Result  -  Result of the game (1-0, 0-1, or 1/2-1/2)
 VARCHAR  PGN  -  Moves of the game
 VARCHAR  Opening  -  The opening played
@@ -39,7 +38,7 @@ yearlytop100:
 Year_Rank  -  The year and rank (composite primary key)
 INT  Year  -  Year of the rankings
 INT  Rank  -  Rank of the player
-INT  Player_ID  -  ID of the player in question
+INT  Player_Name  -  Name of the player in question
 INT  Rating  -  Rating at the time
 
 
@@ -50,7 +49,7 @@ RELATIONSHIPS
 - Book to Master (Many optional to many optional): Books may be authored by masters, but they may not (book.author to master.name, will require junction table)
 - Match to Opening (One required to many optional): Every game will have an opening, whatever the longest book line seen in the game is will be the one associated with that game (match.opening to opening.matches)
 - Match to Endgame (Many optional to many optional): Every endgame position seen in the game will be stored as a game associated with that endgame position (match.pgn and match.start_endgame to endgame.matches, will require junction table)
-- Match to Master (Many required to many required): Every match will have two players play, if those players are masters they will be associated with the master table (match.white_id and match.black_id to master.player_id)
+- Match to Master (Many required to many required): Every match will have two players play, if those players are masters they will be associated with the master table (match.white_name and match.black_name to master.name)
 - Master to Top100 (Many optional to many required): Every top 100 must have masters but not every master will make the top 100 (master.player_id to top100.player_id)
 
 
