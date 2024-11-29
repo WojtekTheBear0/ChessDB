@@ -30,10 +30,10 @@ SET Focus_Area = CASE
 	ELSE 'General'
 END;
 
--- Make sure this works
+
 UPDATE book
 SET Openings = (
-	SELECT GROUP_CONCAT(o.Name)
+	SELECT GROUP_CONCAT(o.Name SEPARATOR ',  ')
 	FROM opening o
 	WHERE book.Description LIKE CONCAT('%', o.Name, '%')
 );
@@ -41,10 +41,7 @@ SET Openings = (
 -- Adjust
 UPDATE `match`
 SET Start_Endgame = (
-	SELECT MIN(move_number)
-	FROM pgn_moves_table  -- A table holding parsed PGN moves
-	WHERE `match`.`Event` = pgn_moves_table.Event
-		AND `match`.Round = pgn_moves_table.Round
-		AND piece_count = 5
-);
+	NULL
+    )
+    WHERE LENGTH(PGN) - LENGTH(REPLACE(PGN, 'x', '')) < 27;
 
