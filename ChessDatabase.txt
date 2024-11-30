@@ -28,23 +28,21 @@ Match_ID  -  Event + round number of match (composite key)
 VARCHAR  Event  -  Event the match was played at
 VARCHAR  Round  -  Round of the event
 VARCHAR  White_Name  -  Name of the player with white
-INT  Black_Name  -  Name of the player with black
+VARCHAR  Black_Name  -  Name of the player with black
 VARCHAR  Result  -  Result of the game (1-0, 0-1, or 1/2-1/2)
 VARCHAR  PGN  -  Moves of the game
 VARCHAR  Opening  -  The opening played
-INT Start_Endgame  -  First move of endgame positions trackable from the database
 
 yearlytop100:
 Year_Rank  -  The year and rank (composite primary key)
 INT  Year  -  Year of the rankings
 INT  Rank  -  Rank of the player
-INT  Player_Name  -  Name of the player in question
+VARCHAR  Player_Name  -  Name of the player in question
 INT  Rating  -  Rating at the time
 
 
 
 RELATIONSHIPS
-- Book to Endgame (Many optional to Many optional): There are different types of endgames, if the description or title of a book references that type of endgame, then that book will be associated with that endgame type (endgame.type to book.endgames, will require junction table)
 - Book to Opening (Many optional to Many optional): There are different openings, if the description or title of the book references that name of the opening, then that book will be associated with that opening (book.openings to opening.name, will require junction table)
 - Book to Master (Many optional to many optional): Books may be authored by masters, but they may not (book.author to master.name, will require junction table)
 - Match to Opening (One required to many optional): Every game will have an opening, whatever the longest book line seen in the game is will be the one associated with that game (match.opening to opening.matches)
