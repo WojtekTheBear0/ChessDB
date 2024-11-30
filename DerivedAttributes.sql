@@ -40,8 +40,6 @@ SET Openings = (
 
 -- Adjust
 UPDATE `match`
-SET Start_Endgame = (
-	NULL
-    )
-    WHERE LENGTH(PGN) - LENGTH(REPLACE(PGN, 'x', '')) < 27;
+SET Start_Endgame = (NULL)
+WHERE LENGTH(PGN) - LENGTH(REPLACE(PGN, 'x', '')) < 27;
 

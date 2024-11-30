@@ -40,8 +40,7 @@ CREATE TABLE `match` (
     Black_Name VARCHAR(255) NOT NULL,          
     Result CHAR(3),                   
     PGN TEXT,                           
-    Opening VARCHAR(255),          
-    Start_Endgame FLOAT,                   
+    Opening VARCHAR(255),                         
     PRIMARY KEY (`Event`, Round),           
     FOREIGN KEY (White_Name) REFERENCES master(`Name`),
     FOREIGN KEY (Black_Name) REFERENCES master(`Name`)
