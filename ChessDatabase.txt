@@ -56,7 +56,7 @@ Sources:
 https://syzygy-tables.info Use for endgames, I would recommend using the 3 to 5 piece tables sense the others are too big
 https://everymanchess.com Use for books, gonna need to do some scraping for this one
 https://huggingface.co/datasets/Lichess/chess-openings You found this one for openings, you can use this one, ball out (https://old.chesstempo.com/chess-openings.html alternative)
-https://ratings.fide.com Use for masters, I would recommend only doing IM's and GM's (2400+), gonna need to scrape but this one should be easy (https://old.chesstempo.com/chess-players.html alternative)
+https://ratings.fide.com Use for masters, I would recommend only doing IM's and GM's (2400+) but you could include as much as you want, gonna need to scrape but this one should be easy (https://old.chesstempo.com/chess-players.html alternative)
 https://ratings.fide.com/download.phtml Use for top 100 players through time, you have to download manual xml files for each year, they only have data going back to 2001 
-** Still looking into matches table source **
+https://www.pgnmentor.com/files.html#events Matches source? You have to download PGN's and there's a lot of them, you can choose to include as much or as little as you want, just make sure you're getting at least the important ones like the candidates tournaments
 
