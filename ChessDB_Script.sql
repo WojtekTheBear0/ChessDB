@@ -9,6 +9,13 @@ CREATE TABLE endgame (
 );
 
 
+CREATE TABLE master (            
+    `Name` VARCHAR(255) PRIMARY KEY,          
+    Country VARCHAR(255),                 
+    Rating INT                            
+);
+
+
 CREATE TABLE book (
     Title VARCHAR(255) PRIMARY KEY,      
     Author VARCHAR(255),                 
@@ -24,13 +31,6 @@ CREATE TABLE opening (
     FEN VARCHAR(255) NOT NULL PRIMARY KEY, 
     Name VARCHAR(255) NOT NULL,            
     ECO VARCHAR(10)                        
-);
-
-
-CREATE TABLE master (            
-    `Name` VARCHAR(255) PRIMARY KEY,          
-    Country VARCHAR(255),                 
-    Rating INT                            
 );
 
 
