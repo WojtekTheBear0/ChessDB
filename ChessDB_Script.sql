@@ -15,8 +15,8 @@ CREATE TABLE book (
     Description TEXT,                    
     Focus_Area VARCHAR(255),            
     Publication_Year INT,              
-    Openings VARCHAR(255)
-    FOREIGN KEY (Master_Name) REFERENCES master(`Name`)
+    Openings VARCHAR(255),
+    FOREIGN KEY (Author) REFERENCES master(`Name`)
 );
 
 
