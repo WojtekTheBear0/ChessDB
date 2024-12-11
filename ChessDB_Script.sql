@@ -15,7 +15,8 @@ CREATE TABLE book (
     Description TEXT,                    
     Focus_Area VARCHAR(255),            
     Publication_Year INT,              
-    Openings VARCHAR(255)               
+    Openings VARCHAR(255)
+    FOREIGN KEY (Master_Name) REFERENCES master(`Name`)
 );
 
 
@@ -62,14 +63,6 @@ CREATE TABLE book_opening (
     Opening_FEN VARCHAR(255) NOT NULL,  
     FOREIGN KEY (Book_Title) REFERENCES book(Title),
     FOREIGN KEY (Opening_FEN) REFERENCES opening(FEN)
-);
-
--- Junction Table: Book to Master
-CREATE TABLE book_master (
-    Book_Title VARCHAR(255) NOT NULL,    
-    Master_Name VARCHAR(255) NOT NULL,   
-    FOREIGN KEY (Book_Title) REFERENCES book(Title),
-    FOREIGN KEY (Master_Name) REFERENCES master(`Name`)
 );
 
 -- Junction Table: Match to Endgame
