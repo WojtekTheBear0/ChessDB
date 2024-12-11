@@ -38,8 +38,3 @@ SET Openings = (
 	WHERE book.Description LIKE CONCAT('%', o.Name, '%')
 );
 
--- Adjust
-UPDATE `match`
-SET Start_Endgame = (NULL)
-WHERE LENGTH(PGN) - LENGTH(REPLACE(PGN, 'x', '')) < 27;
-
