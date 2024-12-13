@@ -38,3 +38,15 @@ SET Openings = (
 	WHERE book.Description LIKE CONCAT('%', o.Name, '%')
 );
 
+
+INSERT INTO book_opening (Book_Title, Opening_FEN)
+SELECT 
+    b.Title AS Book_Title,
+    o.FEN AS Opening_FEN
+FROM 
+    book b
+JOIN 
+    opening o
+ON 
+    b.Description LIKE CONCAT('%', o.Name, '%');
+
